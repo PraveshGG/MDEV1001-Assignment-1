@@ -88,19 +88,22 @@ db.serialize(function()
 
     //  4. For each department, print the total capacity available.
 
-    //creating empy depts object..
-    let depts = {};
+    //creating empy department object..
+    let department = {};
     // table NATURAL JOIN table will merge two tables 
     db.each("SELECT * FROM Department NATURAL JOIN Classroom",
         function(err,row){
-           if(depts[row.Dept_name] === undefined)
-                depts[row.Dept_name] = 0;
-                depts[row.Dept_name] += row.Capacity;
+           if(department[row.Dept_name] === undefined)
+                department[row.Dept_name] = 0;
+                department[row.Dept_name] += row.Capacity;
         },
         function(err,count){
-            let keys = Object.keys(depts);
+            //Object.Keys() returns array of  properties of given object
+            let keys = Object.keys(department);
+
+            //keys.length = 7 and keys[i] has department_name and department object holds capacity values
             for(let i = 0; i != keys.length; ++i){
-                //   console.log(keys[i] + ": "+depts[keys[i]]);
+                  //console.log(keys[i] + ": "+department[keys[i]]);
             }
         }
     );
